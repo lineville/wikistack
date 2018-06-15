@@ -1,0 +1,32 @@
+{
+  "name": "wikistack",
+  "version": "1.0.0",
+  "description": "wikistack fullstack app",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lineville/wikistack.git"
+  },
+  "author": "Liam Neville, Rick Terry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lineville/wikistack/issues"
+  },
+  "homepage": "https://github.com/lineville/wikistack#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "html-template-tag": "^2.0.0",
+    "morgan": "^1.9.0",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.37.10"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
