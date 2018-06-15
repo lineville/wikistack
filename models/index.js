@@ -36,6 +36,15 @@ const Page = db.define('page', {
   status: Sequelize.ENUM('open', 'closed'),
 });
 
+Page.beforeValidate((page) => {
+  page.slug = createSlug(page.title)
+})
+
+// [Title] => string with only url friendly characters
+const createSlug = (title) => {
+  return title.replace(/\s+/g, '_').replace(/\W/g, '');
+}
+
 module.exports = {
   db,
   Page,

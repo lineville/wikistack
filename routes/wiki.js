@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const bodyparser = require('body-parser');
 const addPage = require('../views/addPage');
 const { Page } = require('../models/index');
 
@@ -10,11 +11,12 @@ router.get('/add', (req, res, next) => {
   res.send(addPage());
 });
 
+
 router.post('/', async (req, res, next) => {
-  console.log(req.parser.HTTPParser[2]);
-  const page = new Page({
+  console.log('req body' + req)
+  let page = new Page({
     title: req.body.title,
-    content: req.body.content,
+    content: req.body.content
   });
 
   // make sure we only redirect *after* our save is complete!
@@ -26,5 +28,6 @@ router.post('/', async (req, res, next) => {
     next(error);
   }
 });
+
 
 module.exports = router;
