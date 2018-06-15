@@ -36,6 +36,8 @@ const Page = db.define('page', {
   status: Sequelize.ENUM('open', 'closed'),
 });
 
+Page.belongsTo(User, { as: 'author' });
+
 Page.beforeValidate((page) => {
   page.slug = createSlug(page.title)
 })
