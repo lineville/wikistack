@@ -23,14 +23,13 @@ app.use('/wiki', wikiRouter);
 app.use('/users', userRouter);
 
 // home page
-app.get('/', async (req, res, next) => {
+app.get('/', (req, res, next) => {
   res.redirect('/wiki/');
 });
 
-
 // initialize the app by syncing databases then listen on PORT
 const init = async () => {
-  await models.db.sync({ force: true });
+  await models.db.sync();
   app.listen(PORT, () => {
     console.log(`listening on port ${PORT}...`);
   });

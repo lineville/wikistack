@@ -10,7 +10,13 @@ const { User } = require('../models/index');
 router.get('/', async (req, res, next) => {
   try {
     const pages = await Page.findAll();
-    res.send(main(pages))
+    let authors = [];
+    // console.log(pages);
+    pages.forEach( async (page) => {
+      const author = await User.findById(page.authorId);
+      authors.push(author.name);
+    })
+    res.send(main(pages, authors));
   } catch (error) {
     next(error);
   }
