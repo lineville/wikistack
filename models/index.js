@@ -3,8 +3,27 @@ const db = new Sequelize('postgres://localhost:5432/wikistack', {
   logging: false, //ignore sequelize logs
 });
 
-db.authenticate().then(() => {
-  console.log('connected to the database');
+const Page = db.define('page', {
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  slug: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true
+  },
+  content: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
+  status: Sequelize.ENUM('open', 'closed'),
+});
+
+Page.beforeValidate((page) => {
+  if (!page.slug) {
+    page.slug = createSlug(page.title)
+  }
 });
 
 const User = db.define('user', {
@@ -19,28 +38,8 @@ const User = db.define('user', {
   },
 });
 
-const Page = db.define('page', {
-  title: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: 'No Title',
-  },
-  slug: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  content: {
-    type: Sequelize.TEXT,
-    allowNull: false,
-  },
-  status: Sequelize.ENUM('open', 'closed'),
-});
-
 Page.belongsTo(User, { as: 'author' });
 
-Page.beforeValidate((page) => {
-  page.slug = createSlug(page.title)
-})
 
 // [Title] => string with only url friendly characters
 const createSlug = (title) => {
