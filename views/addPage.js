@@ -31,7 +31,10 @@ module.exports = () =>
 
       <label for="pageStatus" class="col-sm-2 control-label">Page Status</label>
       <div class="col-sm-10">
-        <input id="pageStatus" name="pageStatus" type="text" class="form-control" placeholder="Status" />
+        <select name="status">
+          <option>open</option>
+          <option>closed</option>
+        </select>
       </div>
     </div>
 
@@ -42,5 +45,5 @@ module.exports = () =>
       <button type="submit" class="btn btn-primary">submit</button>
     </div>
 
-  </form>
+    </form>
 `);
